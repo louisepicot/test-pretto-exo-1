@@ -1,0 +1,31 @@
+:root {
+  --container-max: 1016px;
+  --gutter: 16px;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;    
+  background-color: var(--color-bg-secondary);
+  gap: var(--space-2);
+}
+
+/* Tablet */
+@media (min-width: 834px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .container {
+    gap: var(--space-6);
+    background-color: transparent;
+    max-width: var(--container-max);
+    padding: var(--space-10) var(--gutter);
+  }
+}

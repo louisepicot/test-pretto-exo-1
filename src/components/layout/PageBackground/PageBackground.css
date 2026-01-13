@@ -1,0 +1,26 @@
+.page-bg {
+  position: relative;
+  min-height: 100vh;
+
+  overflow-x: hidden; /* avoids tiny horizontal scroll due to the art */
+}
+
+/* Decorative image layer */
+.page-bg__art {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: #e5e5e5;
+  background-image: url("@/assets/svg/city-wall.svg"); /* put svg in /public */
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  height: 50vh;
+  background-size: 80% auto;
+  opacity: 1;
+}
+
+/* Real content always above */
+.page-bg__content {
+  position: relative;
+  z-index: 1;
+}

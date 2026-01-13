@@ -1,0 +1,12 @@
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: var(--color-bg-primary);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-md);
+  transition: opacity 0.2s ease;
+  max-width: max-content;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
