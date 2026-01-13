@@ -1,73 +1,85 @@
-# React + TypeScript + Vite
+# Test Technique Pretto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Vue d'ensemble
 
-Currently, two official plugins are available:
+Test technique React visant à reproduire un design Figma de manière pixel-perfect. L'implémentation inclut un header responsive avec navigation, une section de simulation de crédit et une section d'attestation de financement.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Contraintes :**
 
-## React Compiler
+- React uniquement
+- Fichiers CSS classiques (pas de CSS-in-JS)
+- Layouts Flexbox uniquement (pas de CSS Grid)
+- Design responsive suivant les breakpoints Figma
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Stack Technique
 
-## Expanding the ESLint configuration
+- **React 19.2.0** avec TypeScript 5.9.3
+- **Vite 7.2.4** - Outil de build avec HMR
+- **ESLint** - Qualité de code (TypeScript ESLint, React Hooks)
+- **vite-plugin-svgr** - Import des SVG en composants React
+- **CSS classique** - Aucune bibliothèque CSS-in-JS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Architecture
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   ├── layout/      # Header, Container, PageBackground
+│   ├── sections/    # CreditSimulationSection, FinancingCertificateSection
+│   └── ui/          # Button, ActionCard, FeatureCard, Title
+├── assets/          # Images et icônes SVG
+├── index.css        # Styles globaux et design tokens
+└── typography.css   # Système typographique
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Organisation des composants :**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Layout** : Composants structurels (Header, Container)
+- **UI** : Composants présentatifs réutilisables (Button, ActionCard)
+- **Sections** : Sections spécifiques à la page composant layout et UI
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Co-localisation CSS :** Chaque composant possède son propre fichier CSS dans le même répertoire pour une meilleure maintenabilité.
+
+## Stratégie de Style
+
+### Design Tokens (Variables CSS)
+
+Centralisés dans `index.css` :
+
+- **Couleurs** : Nommage sémantique (`--color-bg-primary`, `--color-text-primary`, `--color-accent`)
+- **Espacement** : Échelle basée sur 4px (`--space-1` à `--space-16`)
+- **Typographie** : Classes de texte réutilisables (`.text-title`, `.text-body`, `.text-button`)
+- **Breakpoints** : `834px` (tablette), `1440px` (desktop)
+
+### Approche
+
+- **Nommage** : Noms de classes simples avec des patterns BEM-like pour les composants complexes
+- **Layout** : Flexbox exclusivement (pas de CSS Grid)
+- **Responsive** : Mobile-first avec des requêtes `@media (min-width: ...)`
+- **Icônes SVG** : Importées en composants React via `vite-plugin-svgr` pour un meilleur tree-shaking et styling
+
+## Détails d'Implémentation Clés
+
+- **Précision pixel-perfect** : Les design tokens garantissent un espacement et un dimensionnement exacts
+- **Réutilisabilité des composants** : Composants UI conçus avec une personnalisation basée sur les props
+- **Séparation des responsabilités** : Frontières claires entre layout, sections et UI
+- **Accessibilité** : HTML sémantique, texte alternatif, hiérarchie de titres appropriée
+
+## Comment Lancer le Projet
+
+```bash
+# Installer les dépendances
+npm install
+
+# Serveur de développement
+npm run dev
+
+# Build de production
+npm run build
+
+# Prévisualiser le build de production
+npm run preview
+
+# Linter
+npm run lint
 ```
