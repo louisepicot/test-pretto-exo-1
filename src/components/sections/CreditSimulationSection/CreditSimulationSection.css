@@ -1,0 +1,53 @@
+.credit-simulation-section {
+  padding: var(--space-6);
+}
+
+.credit-simulation-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  background-color: var(--color-bg-primary);
+}
+
+.credit-simulation-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: var(--space-4);
+  flex: 1;
+}
+
+.credit-simulation-cards {
+  display: flex;
+  gap: var(--space-4);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.credit-simulation-right {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.credit-simulation-right img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tablet */
+@media (min-width: 834px) {
+  .credit-simulation-section {
+    padding: var(--space-8);
+    padding-bottom: 0;
+  }
+  .credit-simulation-content {
+    flex-direction: row;
+  }
+  .credit-simulation-left {
+    margin-bottom: var(--space-8);
+  }
+}
